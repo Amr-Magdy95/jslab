@@ -1,0 +1,122 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        .container {
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+        }
+
+        .todo-list {
+            width: 50%;
+            background-color: hsl(0, 0%, 96%);
+            margin: 10px auto;
+            padding: 20px 40px;
+        }
+
+        .todo-input {
+            text-align: center;
+        }
+
+        .todo-input input {
+            background-color: #fff;
+        }
+
+        ul{
+            list-style-type: none;
+            padding: 0px;
+        }
+
+        ul li{
+            background-color: #fff;
+            padding: 5px 0;
+            margin: 0;
+            border: 1px solid red;
+        }
+
+        .greenBG{
+            background-color: hsl(102,44%,89%);
+        }
+
+        .doneColor{
+            background-color: hsl(120,39%,54%);
+        }
+
+        .deleteColor{
+            background-color: hsl(1,64%,58%);
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="todo-list">
+            <ul id="todos">
+                <li class="greenBG">sdsds</li>
+            </ul>
+
+            <hr>
+
+            <div class="todo-input">
+                <input type="text" id="todo-text">
+                <button onclick="addTodo()">Submit</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        var todoList = [{"text": "Don't Miss Your Appointment", "done": "false"}];
+
+        function todosRender() {
+            document.getElementById("todos").innerHTML = todoList.map(todo => {
+
+                return `<li > <button class="deleteColor" onclick="removeTodo(${JSON.stringify(todo).split('"').join("&quot;")})">Delete</button> <button class="doneColor" onclick="toggleTodo(event, ${JSON.stringify(todo).split('"').join("&quot;")})">Done</button> ${todo.text} </li>`;
+                
+            })
+        };
+
+        todosRender();
+
+        function addTodo() {
+            var todo = document.getElementById("todo-text").value;
+            todoList.push({"text": todo, "done": "false"});
+            console.log(todoList)
+            todosRender();
+            var todo = document.getElementById("todo-text").value = "";
+
+        }
+
+        function toggleTodo(e, todo){
+            e.target.parentNode.classList.toggle("greenBG");
+            for(var i = 0 ; i< todoList.length; i++){
+                if(todoList[i].text == todo.text){
+                    todoList[i].done != todoList[i].done;
+                } 
+            }
+            
+        }
+
+        function removeTodo(todo){
+            for(var i = 0 ; i< todoList.length; i++){
+                if(todoList[i].text == todo.text){
+                    todoList.splice(i,1);
+                } 
+            }
+            todosRender();
+
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>

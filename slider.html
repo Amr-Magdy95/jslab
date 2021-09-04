@@ -1,0 +1,114 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <style>
+            *{
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+            }
+
+            .container{
+                background-color: #fff;
+            }
+
+            .slider-wrapper{
+                width: 60%;
+                height: 100vh;
+                margin: 0 auto;
+                background-color: #eff;
+            }
+
+            button {
+                padding: 16px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                transition-duration: 0.4s;
+                cursor: pointer;
+                background-color: white;
+                color: black;
+                border: 2px solid #555555;
+            }
+
+            button:hover{
+                background-color: #555555;
+                color: white;
+            }
+
+            .slider-wrapper{
+                text-align: center;
+            }
+
+            img{
+                display: inline-block;
+                width: 80%;
+                height:80vh;
+            }
+
+    
+        </style>
+
+    </head>
+    <body>
+        <div class="container">
+            <div class="slider-wrapper">
+                <div class="slider-images">
+                    <!-- add images here div>img-->
+                    <div class="image">
+                        <img src="./images/1.jpg" alt="">
+                    </div>
+                    <div class="image">
+                        <img src="./images/2.jpg" alt="">
+                    </div>
+                    <div class="image">
+                        <img src="./images/3.jpg" alt="">
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button id= "prev-btn">Prev</button>
+                    <button id= "next-btn">Next</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            var sliderImages = document.querySelectorAll(".image img"),
+                nextImage = document.querySelector("#next-btn");
+                prevImage = document.querySelector("#prev-btn"),
+                currentImage = 0;
+            function reset(){
+                for (var i = 0 ; i< sliderImages.length; i++){
+                    sliderImages[i].style.display = "none";
+                }
+            }
+            function startSlide(){
+                reset();
+                sliderImages[0].style.display = "inline-block";
+            }
+
+            prevImage.addEventListener('click', () => {
+                reset();
+                --currentImage;
+                if(currentImage < 0) currentImage += sliderImages.length;
+                sliderImages[currentImage].style.display= "inline-block";
+            });
+
+            nextImage.addEventListener('click', ()=>{
+                reset();
+                ++currentImage;
+                if(currentImage>=sliderImages.length) currentImage-=sliderImages.length;
+                sliderImages[currentImage].style.display = "inline-block";
+            })
+
+            startSlide();
+            console.log(prevImage);
+
+        </script>
+    </body>
+</html>
